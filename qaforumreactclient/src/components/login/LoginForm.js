@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { login } from '../../actions/authActions';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
+import { deleteAllFlashMessage } from '../../actions/flashMessages';
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -47,6 +48,7 @@ class LoginForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
+    this.props.deleteAllFlashMessage();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.login(this.state).then(
@@ -102,11 +104,12 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  login: React.PropTypes.func.isRequired
+  login: React.PropTypes.func.isRequired,
+  deleteAllFlashMessage: React.PropTypes.func.isRequired
 }
 
 LoginForm.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default connect(null, { login })(LoginForm);
+export default connect(null, { login, deleteAllFlashMessage})(LoginForm);

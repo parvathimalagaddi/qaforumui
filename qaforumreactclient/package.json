@@ -28,5 +28,5 @@
     "extends":"./node_modules/react-scripts/config/eslint.js"
   },
   "proxy": "http://104.154.234.77"
-  
+
 }
