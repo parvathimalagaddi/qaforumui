@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createEvent } from '../../actions/eventActions';
 import { addFlashMessage } from '../../actions/flashMessages';
-import TextFieldGroup from '../common/TextFieldGroup';
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 
 class QuestionForm extends React.Component {
   constructor(props) {
@@ -15,10 +15,15 @@ class QuestionForm extends React.Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onClick() {
+    this.context.router.push('/');
   }
 
   onSubmit(e) {
@@ -33,16 +38,17 @@ class QuestionForm extends React.Component {
         console.log("Question submit");
         console.log(res);
         this.props.addFlashMessage({
-          type: 'info',
+          type: 'success',
           text: 'Question posted successfully'
         });
+        this.setState({ errors: { } , isLoading: false });
         this.context.router.push('/')
       },
       (err) => {
         console.log("Question submit Error");
         console.log(err);
         //res.status(401).json({ errors: { form: 'Invalid Credentials' } });
-        this.setState({ errors: { question: err.response.data } , isLoading: false })
+        this.setState({ errors: { question: err.response.data } , isLoading: false });
       }
     );
   }
@@ -54,7 +60,7 @@ class QuestionForm extends React.Component {
       <form onSubmit={this.onSubmit}>
         <h1>Enter question here</h1>
 
-        <TextFieldGroup
+        <TextAreaFieldGroup
           field="question"
           label="Question"
           name="question"
@@ -63,7 +69,18 @@ class QuestionForm extends React.Component {
           error={errors.question}
         />
 
-        <button type="submit" className="btn btn-primary">Submit</button>
+
+        <div className="form-group">
+                <div className="col-sm-1">
+                  <button type="submit" disabled={isLoading} className="btn btn-primary">Submit</button>
+                </div>
+                <div className="col-sm-1">
+                  <button type="button" className="btn btn-primary" onClick={this.onClick}>Cancel</button>
+                </div>
+        </div>
+
+
+
       </form>
     );
   }

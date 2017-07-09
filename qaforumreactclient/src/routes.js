@@ -6,6 +6,7 @@ import Greetings from './components/Greetings';
 import SignupPage from './components/signup/SignupPage';
 import LoginPage from './components/login/LoginPage';
 import QuestionPage from './components/events/QuestionPage';
+import QuestionAnswerComponent from './components/qacomponents/QuestionAnswerComponent';
 import requireAuth from './utils/requireAuth';
 export default (
   <Route path="/" component={App} >
@@ -13,6 +14,7 @@ export default (
   <Route path="signup" component={SignupPage} />
   <Route path="login" component={LoginPage} />
   <Route path="new-questions" component={requireAuth(QuestionPage)} />
+  <Route path="post-answer" component={requireAuth(QuestionAnswerComponent)} />
   </Route>
 
 )

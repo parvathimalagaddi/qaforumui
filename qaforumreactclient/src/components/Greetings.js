@@ -1,5 +1,5 @@
 import React from 'react';
-
+import QuestionListContainer from './qacomponents/QuestionListContainer';
 class Greetings extends React.Component {
 
   constructor(props) {
@@ -15,14 +15,17 @@ class Greetings extends React.Component {
     return (
       <div className="jumbotron">
 
-      <div className="row spaced-row">
-              <div className="col-sm-6"><h4>Top Questions</h4></div>
-              <div className="col-sm-6">
-                <button type="button" onClick={this.onClick} className="btn btn-success pull-right">Ask Question</button>
-              </div>
+
+      <div className='page-header'>
+        <div className='btn-toolbar pull-right'>
+          <div className='btn-group'>
+            <button type='button'  onClick={this.onClick} className='btn btn-primary'>Ask Question</button>
+          </div>
+        </div>
+        <h2>Top Questions</h2>
       </div>
 
-
+      <QuestionListContainer/>
       </div>
     );
   }
