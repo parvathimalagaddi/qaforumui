@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
+import logo from './logoooo.png';
 
 class NavigationBar extends React.Component {
   logout(e) {
@@ -13,6 +14,11 @@ class NavigationBar extends React.Component {
 
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
+        <li><a href="#" onClick={this.logout.bind(this)}>
+        <span className="glyphicon glyphicon-user"></span>&nbsp;&nbsp;
+          <span>{this.props.auth.user.sub}</span>
+            </a>
+        </li>
         <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
       </ul>
     );
@@ -28,7 +34,8 @@ class NavigationBar extends React.Component {
       <nav className="navbar navbar-inverse bg-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand">Home</Link>
+            <Link to="/" className="navbar-brand"><img src={logo} width="80" height="50"></img></Link>
+
           </div>
 
           <div className="collapse navbar-collapse">

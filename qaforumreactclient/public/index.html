@@ -16,7 +16,61 @@
     <title>QA Forum</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+    .jumbotron {
+    background-image: url("%PUBLIC_URL%/paper.gif");
+    height: 100%;
 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.bg-inverse{
+  background-image: url("%PUBLIC_URL%/paper.gif");
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.navbar {
+ min-height: 50px;
+ height: 63px;
+}
+
+.navbar-brand {
+ padding: 0 15px;
+ height: 50px;
+ line-height: 70px;
+}
+
+.navbar-toggle {
+ /* (80px - button height 34px) / 2 = 23px */
+ margin-top: 23px;
+ padding: 9px 10px !important;
+}
+
+@media (min-width: 768px) {
+ .navbar-nav > li > a {
+   /* (80px - line-height of 27px) / 2 = 26.5px */
+   padding-top: 26.5px;
+   padding-bottom: 26.5px;
+   line-height: 27px;
+ }
+}
+@media (min-width: 768px) {
+ .navbar-brand   {
+   /* (80px - line-height of 27px) / 2 = 26.5px */
+   padding-top: 9px;
+   padding-bottom: 30px;
+   line-height: 27px;
+ }
+}
+</style>
   </head>
   <body>
     <div id="app"></div>
