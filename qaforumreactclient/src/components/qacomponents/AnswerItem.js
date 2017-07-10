@@ -11,8 +11,9 @@ class AnswerItem extends React.Component {
         let postTime = new Date(answer.postTime).toString();
 				return(
 					<div className="container">
-							<p>
+							<p><h4>
 								{answer.answer}
+								</h4>
 							</p>
 
 							<br/>

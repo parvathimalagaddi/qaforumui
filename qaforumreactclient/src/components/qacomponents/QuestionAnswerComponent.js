@@ -27,7 +27,7 @@ class QuestionAnswerComponent extends React.Component{
     this.onClick = this.onClick.bind(this);
   }
 
-  
+
 
   onSubmit(e) {
     e.preventDefault();
@@ -120,7 +120,7 @@ class QuestionAnswerComponent extends React.Component{
   				));
         }
 				return(
-          <div className="container">
+          <div className="jumbotron">
             <p><h2>{questionDetails.question}</h2></p>
             <p><h4>{ansCount + " Answers"}</h4></p>
             <hr></hr>
