@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestionDetail } from '../../actions/QuestionActions';
+import { addAnswer, fetchQuestionDetail } from '../../actions/QuestionActions';
 import { addFlashMessage , deleteAllFlashMessage} from '../../actions/flashMessages';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import AnswerItem  from './AnswerItem';
@@ -27,6 +27,8 @@ class QuestionAnswerComponent extends React.Component{
     this.onClick = this.onClick.bind(this);
   }
 
+  
+
   onSubmit(e) {
     e.preventDefault();
     this.props.deleteAllFlashMessage();
@@ -39,12 +41,18 @@ class QuestionAnswerComponent extends React.Component{
         (res) => {
           console.log("Answer submit");
           console.log(res);
+          let currentDate = new Date();
+          currentDate = currentDate.getMilliseconds();
+          let answerObj1={};
+          answerObj1.username=this.props.user.sub;
+          answerObj1.answer = this.state.answer;
+          answerObj1.postTime = currentDate;
+          this.props.addAnswer(answerObj1);
           this.props.addFlashMessage({
             type: 'success',
             text: 'Answer posted successfully'
           });
           this.setState({ errors: { } , isLoading: false });
-          this.context.router.push('/');
         },
         (err) => {
           console.log("Answer submit Error");
@@ -163,6 +171,7 @@ class QuestionAnswerComponent extends React.Component{
       isAuthenticated: React.PropTypes.bool.isRequired,
       addFlashMessage: React.PropTypes.func.isRequired,
       user: React.PropTypes.object.isRequired,
+      addAnswer:React.PropTypes.func.isRequired
     }
 
-export default connect(mapStateToProps, { fetchQuestionDetail,deleteAllFlashMessage, postAnswer,addFlashMessage })(QuestionAnswerComponent);
+export default connect(mapStateToProps, { addAnswer, fetchQuestionDetail,deleteAllFlashMessage, postAnswer,addFlashMessage })(QuestionAnswerComponent);

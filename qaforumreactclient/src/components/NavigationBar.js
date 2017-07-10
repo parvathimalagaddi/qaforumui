@@ -25,7 +25,7 @@ class NavigationBar extends React.Component {
     );
 
     return (
-      <nav className="navbar navbar-default">
+      <nav className="navbar navbar-inverse bg-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
             <Link to="/" className="navbar-brand">Home</Link>

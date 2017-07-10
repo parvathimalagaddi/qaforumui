@@ -14,7 +14,7 @@ export default (
   <Route path="signup" component={SignupPage} />
   <Route path="login" component={LoginPage} />
   <Route path="new-questions" component={requireAuth(QuestionPage)} />
-  <Route path="post-answer" component={requireAuth(QuestionAnswerComponent)} />
+  <Route path="post-answer" component={QuestionAnswerComponent} />
   </Route>
 
 )

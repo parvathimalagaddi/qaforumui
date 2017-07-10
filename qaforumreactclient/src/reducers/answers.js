@@ -1,4 +1,4 @@
-import {FETCH_QUESTION} from '../actions/types';
+import {FETCH_QUESTION, ADD_ANSWER} from '../actions/types';
 
 
 export default (currentState = [], action = {}) => {
@@ -6,6 +6,11 @@ export default (currentState = [], action = {}) => {
           case 'FETCH_QUESTION':
   					currentState = action.payload;
   					return currentState;
+            case 'ADD_ANSWER':
+            if(currentState.answers) {
+              currentState.answers.push(action.answer);
+            }
+              return currentState;
 				default :
 					return currentState;
 			}

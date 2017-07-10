@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_QUESTIONS, FETCH_QUESTION} from './types';
+import { ADD_ANSWER, FETCH_QUESTIONS, FETCH_QUESTION} from './types';
 
 export function fetchQuestions() {
   return (dispatch) => {
@@ -27,4 +27,11 @@ export function fetchQuestionDetail(qid) {
 				});
     });
   }
+}
+
+export function addAnswer(answer) {
+  return {
+    type: ADD_ANSWER,
+    answer
+  };
 }

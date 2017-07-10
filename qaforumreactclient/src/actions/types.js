@@ -5,3 +5,4 @@ export const DELETE_ALL_FLASH_MESSAGE = 'DELETE_ALL_FLASH_MESSAGE';
 export const ADD_NEW = 'ADD_NEW';
 export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
 export const FETCH_QUESTION = 'FETCH_QUESTION';
+export const ADD_ANSWER = 'ADD_ANSWER';
