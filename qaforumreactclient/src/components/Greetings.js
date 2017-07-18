@@ -50,7 +50,7 @@ class Greetings extends React.Component {
       <div className='page-header'>
         <div className='btn-toolbar pull-right'>
           <div className='btn-group'>
-            <button type='button'  onClick={this.onClick} className='btn btn-primary'>Ask Question</button>
+            <button type='button'  onClick={this.onClick} className='btn btn-success'>Ask Question</button>
           </div>
         </div>
         <h2>Top Questions</h2>

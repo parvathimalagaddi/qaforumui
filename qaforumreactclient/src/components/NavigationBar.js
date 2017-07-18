@@ -52,7 +52,7 @@ class NavigationBar extends React.Component {
 
     const guestLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/signup">Sign up</Link></li>
+        <li><Link to="/signup"><span className="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Sign up</Link></li>
         <li><Link to="/login"><span className="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</Link></li>
       </ul>
     );
