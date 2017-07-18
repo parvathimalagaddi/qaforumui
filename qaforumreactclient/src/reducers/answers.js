@@ -9,6 +9,9 @@ export default (currentState = [], action = {}) => {
             case 'ADD_ANSWER':
             if(currentState.answers) {
               currentState.answers.push(action.answer);
+            } else {
+              currentState.answers = [];
+              currentState.answers.push(action.answer);
             }
               return currentState;
 				default :

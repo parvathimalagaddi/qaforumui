@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { createEvent } from '../../actions/eventActions';
 import { addFlashMessage } from '../../actions/flashMessages';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 class QuestionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       question: '',
+      description:'',
       errors: {},
       isLoading: false
     };
@@ -31,6 +33,7 @@ class QuestionForm extends React.Component {
     let questionObj={};
     questionObj.username=this.props.user.sub;
     questionObj.question = this.state.question;
+    questionObj.description = this.state.description;
     console.log("QUESTION");
     console.log(questionObj);
     this.props.createEvent(questionObj).then(
@@ -54,19 +57,26 @@ class QuestionForm extends React.Component {
   }
 
   render() {
-    const { question, errors, isLoading } = this.state;
+    const { question,description, errors, isLoading } = this.state;
 
     return (
       <form onSubmit={this.onSubmit}>
         <h1>Enter question here</h1>
 
-        <TextAreaFieldGroup
-          field="question"
-          label="Question"
-          name="question"
-          value={question}
+        <TextFieldGroup
+          error={errors != undefined ? errors.question: ""}
+          label="Title"
           onChange={this.onChange}
-          error={errors.question}
+          value={this.state.question}
+          field="question"
+        />
+        <TextAreaFieldGroup
+          field="description"
+          label="Description"
+          name="description"
+          value={description}
+          onChange={this.onChange}
+          error={errors.description}
         />
 
 

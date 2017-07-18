@@ -121,8 +121,11 @@ class QuestionAnswerComponent extends React.Component{
         }
 				return(
           <div className="jumbotron">
-            <p><h2>{questionDetails.question}</h2></p>
-            <p><h4>{ansCount + " Answers"}</h4></p>
+          <p className="questionTitleText"><h3>{questionDetails.question}</h3></p>
+          <hr></hr>
+            <p className="questionText"><h6 className="questionText">{questionDetails.description}</h6></p>
+<hr></hr>
+            <p><h2 className="h2Style">{ansCount + " Answers"}</h2></p>
             <hr></hr>
             <div className="container">
               {answerItemItems}

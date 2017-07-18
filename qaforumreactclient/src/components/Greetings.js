@@ -4,14 +4,45 @@ class Greetings extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
+    this.state = {
+      searchCriteria: ''
+    };
+
+        this.onClick = this.onClick.bind(this);
+
+  }
+
+  componentWillReceiveProps(nextProps){
+
+              const { id, location } = nextProps;
+                  const { pathname, state } = location;
+                  if(state && state.searchCriteria && state.searchCriteria != this.state.searchCriteria) {
+                    this.setState({ searchCriteria: state.searchCriteria });
+                  }
+
+      }
+
+  componentWillUpdate(nextProps) {
+    console.log("componentWillUpdate: Gree");
+
+    const { id, location } = nextProps;
+        const { pathname, state } = location;
+        if(state && state.searchCriteria && state.searchCriteria != this.state.searchCriteria) {
+          this.setState({ searchCriteria: state.searchCriteria });
+        }
   }
 
   onClick() {
     this.context.router.push('/new-questions');
   }
   render() {
-
+    console.log("componentWillReceiveProps : Geeting");
+        const { id, location } = this.props;
+        const { pathname, state } = location;
+        let searchCriteria="";
+      if(state && state.searchCriteria) {
+        searchCriteria =state.searchCriteria;
+      }
     return (
       <div className="jumbotron">
 
@@ -25,7 +56,7 @@ class Greetings extends React.Component {
         <h2>Top Questions</h2>
       </div>
 
-      <QuestionListContainer/>
+      <QuestionListContainer searchCriteria={searchCriteria}/>
       </div>
     );
   }

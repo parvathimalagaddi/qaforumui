@@ -5,12 +5,30 @@ import QuestionList from './QuestionList';
 
 class QuestionListContainer extends React.Component{
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchCriteria: ""
+    };
+  }
   componentDidMount(){
+    let searchCriteria=this.props.searchCriteria;
        this.loadQuestions();
    }
+   componentWillMount(){
 
-   loadQuestions(){
-        this.props.fetchQuestions();
+         console.log("componentWillMount : QuestionListCon");
+    }
+
+    componentWillReceiveProps(nextProps){
+                if (nextProps.searchCriteria !== this.props.searchCriteria) {
+                    this.setState({searchCriteria: nextProps.searchCriteria});
+                    this.loadQuestions(nextProps.searchCriteria);
+                }
+
+        }
+   loadQuestions(searchCriteria){
+        this.props.fetchQuestions(searchCriteria);
     }
 
 			render(){

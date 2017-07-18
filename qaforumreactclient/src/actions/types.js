@@ -6,3 +6,4 @@ export const ADD_NEW = 'ADD_NEW';
 export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
 export const FETCH_QUESTION = 'FETCH_QUESTION';
 export const ADD_ANSWER = 'ADD_ANSWER';
+export const SEARCH_QUESTION = 'SEARCH_QUESTION';

@@ -17,7 +17,7 @@ class QuestionItem extends React.Component{
 								<h5>
 									<small>
 										<ul className="list-inline">
-											<li><a href={postAnswerUrl}  data-toggle="tooltip" data-placement="top" title={question.postTime}>Posted on: {question.postTime}</a></li>
+											<li><a href={postAnswerUrl}  data-toggle="tooltip" data-placement="top" title={question.postTime}>Posted on: {new Date(question.postTime).toString()}</a></li>
 											<li><a href={postAnswerUrl} data-toggle="tooltip" data-placement="bottom" title={question.username}>Posted by: {question.username}</a></li>
 										</ul>
 									</small>
