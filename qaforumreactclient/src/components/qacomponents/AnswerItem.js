@@ -11,12 +11,12 @@ class AnswerItem extends React.Component {
         let postTime = new Date(answer.postTime).toString();
 				return(
 					<div className="container">
+					<div className="well">
 							<p><h6 className="questionText">
 								{answer.answer}
 								</h6>
 							</p>
-
-							<br/>
+</div>
 							<img src={logo} className="media-object" width="30" height="30"/>
 							<h6 className="media-heading">{answer.username}</h6>
 							<h6>{postTime}</h6>
