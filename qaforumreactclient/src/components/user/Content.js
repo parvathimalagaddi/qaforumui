@@ -2,6 +2,7 @@ import React from 'react';
 import QuestionListContainer from '../qacomponents/QuestionListContainer';
 import QuestionAnswerComponent from '../qacomponents/QuestionAnswerComponent';
 import SignupPage from '../signup/SignupPage';
+import ProfilePage from '../profile/ProfilePage';
 import LoginPage from '../login/LoginPage';
 import QuestionPage from '../events/QuestionPage';
 import UserListContainer from './UserListContainer';
@@ -100,6 +101,11 @@ class Content extends React.Component {
         <div>
         <br></br>
         <ChatWindow changeTab={this.props.changeTab.bind(this,  { name: 'Home', isActive: true })}/></div>
+        :null}
+        {this.props.activeTab.name === 'My Profile' ?
+        <div>
+        <br></br>
+        <ProfilePage changeTab={this.props.changeTab.bind(this,  { name: 'Home', isActive: true })}/></div>
         :null}
       </div>
     );

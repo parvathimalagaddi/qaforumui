@@ -18,6 +18,7 @@ class NavigationBar extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSignUPClick = this.onSignUPClick.bind(this);
     this.onLigInClick = this.onLigInClick.bind(this);
+    this.onProfileClick = this.onProfileClick.bind(this);
   }
 
 
@@ -31,6 +32,10 @@ class NavigationBar extends React.Component {
   }
   onSignUPClick(e) {
     this.props.changeTab({ name: 'Sign Up', isActive: true });
+  }
+
+  onProfileClick(e) {
+    this.props.changeTab({ name: 'My Profile', isActive: true });
   }
 
   onLigInClick(e) {
@@ -49,7 +54,7 @@ class NavigationBar extends React.Component {
 
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><a href="#" onClick={this.logout.bind(this)}>
+        <li><a href="#" onClick={this.onProfileClick}>
         <span className="glyphicon glyphicon-user"></span>&nbsp;&nbsp;
           <span>{this.props.auth.user.sub}</span>
             </a>

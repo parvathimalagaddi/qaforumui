@@ -26,7 +26,8 @@
                                 { name: 'Questions', isActive: false },
                                 { name: 'Users', isActive: false },
                                 { name: 'New Question', isActive: false },
-                                {name: 'Live Help' , isActive: false}
+                                {name: 'Live Help' , isActive: false},
+                                {name: 'My Profile' , isActive: false}
                               ]
           tabData =   this.props.isAuthenticated ?  userTabsData :    guestTabsData ;
       this.state = {
@@ -58,7 +59,8 @@
                           { name: 'Questions', isActive: false },
                           { name: 'Users', isActive: false },
                           { name: 'New Question', isActive: false },
-                          {name: 'Live Help' , isActive: false}
+                          {name: 'Live Help' , isActive: false},
+                          {name: 'My Profile' , isActive: false}
                         ]
     let tabData =   nextProps.isAuthenticated  ?  userTabsData :    guestTabsData;
           this.setState({searchCriteria: nextProps.searchCriteria, tabData:tabData});
@@ -81,7 +83,8 @@
                           { name: 'Questions', isActive: false },
                           { name: 'Users', isActive: false },
                           { name: 'New Question', isActive: false },
-                          {name: 'Live Help' , isActive: false}
+                          {name: 'Live Help' , isActive: false},
+                          {name: 'My Profile' , isActive: false}
                         ]
     let tabData =   nextProps.isAuthenticated  ?  userTabsData :    guestTabsData;
           this.setState({searchCriteria: nextProps.searchCriteria, tabData:tabData});

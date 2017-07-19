@@ -5,3 +5,9 @@ export function userSignupRequest(userData) {
     return axios.post('/api/v1/user/', userData);
   }
 }
+
+export function profileEdit(userData) {
+  return dispatch => {
+    return axios.put('/api/v1/user/', userData);
+  }
+}
