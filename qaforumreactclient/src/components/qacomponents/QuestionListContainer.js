@@ -12,21 +12,27 @@ class QuestionListContainer extends React.Component{
     };
   }
   componentDidMount(){
-    let searchCriteria=this.props.searchCriteria;
-       this.loadQuestions();
+
+
    }
    componentWillMount(){
 
-         console.log("componentWillMount : QuestionListCon");
+     if(this.props.isAllQuestion) {
+       this.loadQuestions();
+     } else {
+         this.loadQuestions(this.props.searchCriteria);
+     }
     }
 
     componentWillReceiveProps(nextProps){
-                if (nextProps.searchCriteria !== this.props.searchCriteria) {
-                    this.setState({searchCriteria: nextProps.searchCriteria});
-                    this.loadQuestions(nextProps.searchCriteria);
-                }
-
+      if(nextProps.searchCriteria != this.props.searchCriteria) {
+          if(this.props.isAllQuestion) {
+            this.loadQuestions();
+          } else {
+              this.loadQuestions(nextProps.searchCriteria);
+          }
         }
+    }
    loadQuestions(searchCriteria){
         this.props.fetchQuestions(searchCriteria);
     }

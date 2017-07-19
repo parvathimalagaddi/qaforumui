@@ -42,6 +42,7 @@ class NavigationBar extends React.Component {
   this.props.deleteAllFlashMessage();
   this.props.searchQuestionHandle(this.state.searchCriteria);
 
+
 }
   render() {
     const { isAuthenticated } = this.props.auth;
