@@ -5,6 +5,7 @@ import SignupPage from '../signup/SignupPage';
 import LoginPage from '../login/LoginPage';
 import QuestionPage from '../events/QuestionPage';
 import UserListContainer from './UserListContainer';
+import ChatWindow from '../chat/ChatWindow';
 class Content extends React.Component {
 
   constructor(props) {
@@ -94,6 +95,11 @@ class Content extends React.Component {
         {this.props.activeTab.name === 'Log in' ?
         <div>
         <LoginPage changeTab={this.props.changeTab.bind(this,  { name: 'Home', isActive: true })}/></div>
+        :null}
+        {this.props.activeTab.name === 'Live Help' ?
+        <div>
+        <br></br>
+        <ChatWindow changeTab={this.props.changeTab.bind(this,  { name: 'Home', isActive: true })}/></div>
         :null}
       </div>
     );
