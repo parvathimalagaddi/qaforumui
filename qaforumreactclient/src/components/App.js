@@ -39,7 +39,8 @@
     }
 
     searchQuestionHandle(searchCriteria) {
-      this.setState({ searchCriteria: searchCriteria});
+      this.setState({ searchCriteria: searchCriteria,activeTab:{ name: 'Home', isActive: true } });
+
     }
     componentWillReceiveProps(nextProps){
 

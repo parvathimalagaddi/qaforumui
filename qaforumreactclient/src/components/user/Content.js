@@ -58,7 +58,7 @@ class Content extends React.Component {
         </div>
         <h2>Top Questions</h2>
       </div>
-      <QuestionListContainer tabName = {this.props.activeTab.name} questionClickHandle = {this.questionClickHandle} searchCriteria={this.state.searchCriteria}></QuestionListContainer></div>
+      <QuestionListContainer isAllQuestion = {false} tabName = {this.props.activeTab.name} questionClickHandle = {this.questionClickHandle} searchCriteria={this.state.searchCriteria}></QuestionListContainer></div>
     }
     return (
       <div id="tabContent">
@@ -76,7 +76,7 @@ class Content extends React.Component {
           </div>
           <h2>All Questions</h2>
         </div>
-        <QuestionListContainer tabName = {this.props.activeTab.name} questionClickHandle = {this.questionClickHandle} searchCriteria={this.state.searchCriteria}></QuestionListContainer></div>
+        <QuestionListContainer isAllQuestion = {true} tabName = {this.props.activeTab.name} questionClickHandle = {this.questionClickHandle} searchCriteria={this.state.searchCriteria}></QuestionListContainer></div>
         :null}
         {this.props.activeTab.name === 'New Question' ?
         <div> <QuestionPage tabName = {this.props.activeTab.name}  changeTab={this.props.changeTab.bind(this,  { name: 'Home', isActive: true })}/></div>
