@@ -1,65 +1,55 @@
 import React from 'react';
-import QuestionListContainer from './qacomponents/QuestionListContainer';
+import Content from './user/Content';
+import Tabs from './user/Tabs';
 class Greetings extends React.Component {
 
   constructor(props) {
     super(props);
+    let tabData = [
+              { name: 'Home', isActive: true },
+              { name: 'Questions', isActive: false },
+              { name: 'Users', isActive: false }
+            ]
     this.state = {
-      searchCriteria: ''
+      searchCriteria: '',
+      tabData : tabData,
+              activeTab:tabData[0]
     };
 
-        this.onClick = this.onClick.bind(this);
-
+this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
 
-              const { id, location } = nextProps;
-                  const { pathname, state } = location;
-                  if(state && state.searchCriteria && state.searchCriteria != this.state.searchCriteria) {
-                    this.setState({ searchCriteria: state.searchCriteria });
-                  }
+    if (nextProps.searchCriteria !== this.props.searchCriteria) {
+        this.setState({searchCriteria: nextProps.searchCriteria});
+    }
 
-      }
+  }
 
   componentWillUpdate(nextProps) {
-    console.log("componentWillUpdate: Gree");
-
-    const { id, location } = nextProps;
-        const { pathname, state } = location;
-        if(state && state.searchCriteria && state.searchCriteria != this.state.searchCriteria) {
-          this.setState({ searchCriteria: state.searchCriteria });
-        }
+    if (nextProps.searchCriteria !== this.props.searchCriteria) {
+        this.setState({searchCriteria: nextProps.searchCriteria});
+    }
   }
 
-  onClick() {
-    this.context.router.push('/new-questions');
+  getInitialState() {
+    return {
+      activeTab: this.state.tabData[0]
+    }
+  }
+  handleClick(tab) {
+    this.setState({activeTab: tab});
   }
   render() {
-    console.log("componentWillReceiveProps : Geeting");
-        const { id, location } = this.props;
-        const { pathname, state } = location;
-        let searchCriteria="";
-      if(state && state.searchCriteria) {
-        searchCriteria =state.searchCriteria;
-      }
     return (
-      <div className="jumbotron">
-
-
-      <div className='page-header'>
-        <div className='btn-toolbar pull-right'>
-          <div className='btn-group'>
-            <button type='button'  onClick={this.onClick} className='btn btn-success'>Ask Question</button>
-          </div>
-        </div>
-        <h2>Top Questions</h2>
-      </div>
-
-      <QuestionListContainer searchCriteria={searchCriteria}/>
+      <div key="greeting">
+        <Tabs activeTab={this.state.activeTab} tabData={this.state.tabData} changeTab={this.handleClick} />
+        <Content activeTab={this.state.activeTab} searchCriteria={this.state.searchCriteria}/>
       </div>
     );
   }
+
 }
 
 Greetings.contextTypes = {

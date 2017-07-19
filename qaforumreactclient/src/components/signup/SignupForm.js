@@ -78,9 +78,9 @@ class SignupForm extends React.Component {
           console.log("res" + res);
           this.props.addFlashMessage({
             type: 'success',
-            text: 'You signed up successfully. Welcome!'
+            text: 'You signed up successfully. Please log in to post questions and answers!'
           });
-          this.context.router.push('/');
+            this.props.changeTab();
         },
         (err) => {
           console.log("error" + err);

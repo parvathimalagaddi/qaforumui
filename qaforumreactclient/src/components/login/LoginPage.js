@@ -4,13 +4,13 @@ import LoginForm from './LoginForm';
 class LoginPage extends React.Component {
   render() {
     return (
-        <div className="jumbotron">
+
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
-          <LoginForm />
+          <LoginForm  changeTab={this.props.changeTab} />
         </div>
       </div>
-      </div>
+
     );
   }
 }

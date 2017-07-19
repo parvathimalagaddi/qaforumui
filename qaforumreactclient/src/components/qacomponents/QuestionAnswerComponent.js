@@ -11,13 +11,11 @@ class QuestionAnswerComponent extends React.Component{
   constructor(props) {
     super(props);
 
-    const { id, location } = this.props;
-        const { pathname, query } = location;
-        let qid = query.qid;
+
 
     this.state = {
       answer: '',
-      qid:qid,
+      questionId:this.props.questionId,
       errors: {},
       isLoading: false
     };
@@ -28,7 +26,12 @@ class QuestionAnswerComponent extends React.Component{
   }
 
 
+  componentWillReceiveProps(nextProps){
+              if (nextProps.questionId !== this.props.questionId) {
+                  this.setState({questionId: nextProps.questionId});
+              }
 
+      }
   onSubmit(e) {
     e.preventDefault();
     this.props.deleteAllFlashMessage();
@@ -37,7 +40,7 @@ class QuestionAnswerComponent extends React.Component{
       let answerObj={};
       answerObj.username=this.props.user.sub;
       answerObj.answer = this.state.answer;
-      this.props.postAnswer(this.state.qid, answerObj).then(
+      this.props.postAnswer(this.state.questionId, answerObj).then(
         (res) => {
           console.log("Answer submit");
           console.log(res);
@@ -69,12 +72,13 @@ class QuestionAnswerComponent extends React.Component{
         type: 'error',
         text: 'You need to login to post answer'
       });
-      this.context.router.push('/login');
+      this.props.questionClickHandle(false, "");
+      this.props.changeTab();
     }
   }
 
   onClick() {
-    this.context.router.push('/');
+    this.props.questionClickHandle(false, "");
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -85,7 +89,7 @@ class QuestionAnswerComponent extends React.Component{
    }
 
    fetchQuestionDetail(){
-        this.props.fetchQuestionDetail(this.state.qid);
+        this.props.fetchQuestionDetail(this.state.questionId);
     }
 
     calculateDuration(postTime, currentTime) {
@@ -120,10 +124,10 @@ class QuestionAnswerComponent extends React.Component{
   				));
         }
 				return(
-          <div className="jumbotron">
+          <div >
           <p className="questionTitleText"><h3>{questionDetails.question}</h3></p>
           <hr></hr>
-            <p className="questionText"><h6 className="questionText">{questionDetails.description}</h6></p>
+            <p className="questionText"><h4 className="questionText">{questionDetails.description}</h4></p>
 <hr></hr>
             <p><h2 className="h2Style">{ansCount + " Answers"}</h2></p>
             <hr></hr>

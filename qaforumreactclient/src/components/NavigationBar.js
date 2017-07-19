@@ -16,6 +16,8 @@ class NavigationBar extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSignUPClick = this.onSignUPClick.bind(this);
+    this.onLigInClick = this.onLigInClick.bind(this);
   }
 
 
@@ -27,14 +29,19 @@ class NavigationBar extends React.Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+  onSignUPClick(e) {
+    this.props.changeTab({ name: 'Sign Up', isActive: true });
+  }
+
+  onLigInClick(e) {
+    this.props.changeTab({ name: 'Log in', isActive: true });
+  }
 
   onSubmit(e) {
   e.preventDefault();
   this.props.deleteAllFlashMessage();
-  this.context.router.push({
-              pathname: '/',
-              state: {"searchCriteria": this.state.searchCriteria}
-            });
+  this.props.searchQuestionHandle(this.state.searchCriteria);
+
 }
   render() {
     const { isAuthenticated } = this.props.auth;
@@ -52,8 +59,8 @@ class NavigationBar extends React.Component {
 
     const guestLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/signup"><span className="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Sign up</Link></li>
-        <li><Link to="/login"><span className="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</Link></li>
+        <li><Link onClick={this.onSignUPClick}><span className="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Sign up</Link></li>
+        <li><Link onClick={this.onLigInClick}><span className="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</Link></li>
       </ul>
     );
 

@@ -25,7 +25,7 @@ class QuestionForm extends React.Component {
   }
 
   onClick() {
-    this.context.router.push('/');
+      this.props.changeTab();
   }
 
   onSubmit(e) {
@@ -45,7 +45,7 @@ class QuestionForm extends React.Component {
           text: 'Question posted successfully'
         });
         this.setState({ errors: { } , isLoading: false });
-        this.context.router.push('/')
+          this.props.changeTab();
       },
       (err) => {
         console.log("Question submit Error");

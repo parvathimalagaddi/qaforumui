@@ -36,7 +36,7 @@ class QuestionListContainer extends React.Component{
 				return(
 
 					<div>
-						<QuestionList questions={questions} searchCriteria={this.state.searchCriteria} toggle={this.props.toggle}></QuestionList>
+						<QuestionList questionClickHandle={this.props.questionClickHandle} questions={questions} searchCriteria={this.state.searchCriteria} toggle={this.props.toggle}></QuestionList>
 					</div>
 				)
 			}

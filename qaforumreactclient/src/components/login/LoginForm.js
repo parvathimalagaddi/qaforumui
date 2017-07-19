@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
         (res) => {
           console.log("LOGIN FORM");
           console.log(res);
-          this.context.router.push('/')
+          this.props.changeTab();
         },
         (err) => {
           console.log("Login Error");

@@ -13,7 +13,7 @@ class QuestionList extends React.Component{
 					questionsItems = <div className="alert alert-success"><strong>Sorry, no results were found</strong>.</div>
 				} else {
 				 questionsItems = questionList.map((question, index) => (
-					<QuestionItem question={question} key={index} toggle={this.props.toggle}></QuestionItem>
+					<QuestionItem questionClickHandle={this.props.questionClickHandle} question={question} key={index} toggle={this.props.toggle}></QuestionItem>
 				));
 			}
 				return (

@@ -1,8 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import QuestionAnswerComponent from './QuestionAnswerComponent';
 
 class QuestionItem extends React.Component{
-			onBugClick(){
-				this.props.toggle(this.props.data);
+	constructor(props) {
+    super(props);
+
+
+    this.onClick = this.onClick.bind(this);
+  }
+			onClick(questionid){
+				this.props.questionClickHandle(true,questionid);
 			}
 			render(){
 				let question = this.props.question;
@@ -10,7 +18,7 @@ class QuestionItem extends React.Component{
 				return (
           <div key={"question-summary" + this.props.index} className="well well-sm">
               <h5>
-                <a href={postAnswerUrl} className="questionhyperlink">{question.question}</a>
+                <a  onClick={this.onClick.bind(this, question._id)} className="questionhyperlink">{question.question}</a>
               </h5>
 
               <p className="text-primary">

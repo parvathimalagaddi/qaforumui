@@ -10,7 +10,6 @@ import QuestionAnswerComponent from './components/qacomponents/QuestionAnswerCom
 import requireAuth from './utils/requireAuth';
 export default (
   <Route path="/" component={App} >
-  <IndexRoute component={Greetings} />
   <Route path="signup" component={SignupPage} />
   <Route path="login" component={LoginPage} />
   <Route path="new-questions" component={requireAuth(QuestionPage)} />
