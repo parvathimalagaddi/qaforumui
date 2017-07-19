@@ -15,17 +15,18 @@ class ChatEdit extends React.Component {
 
     onAddNewClick() {
         let messageContent = {'message' : this.refs.txtChatMessage.value, 'user' : this.props.user.sub};
+        this.refs.txtChatMessage.value = "";
         this.props.addNew(messageContent);
         this.socketSend.send(JSON.stringify(messageContent));
     }
     render() {
         return ( 
-            <section className = "edit">
-                <label htmlFor = "" > Message: </label> 
-                <input type = "text" ref = "txtChatMessage" />
-                <input type = "button" value = "Add New"
-                onClick = { this.onAddNewClick.bind(this) } /> 
-            </section >)
+            <form>
+                <div className="form-group">
+                    <input type="text" className="form-control" ref = "txtChatMessage"></input>
+                    <button className="form-control btn btn-success" onClick = { this.onAddNewClick.bind(this) } > Broadcast </button> 
+                </div>             
+            </form>)
     }
 
     componentWillUnmount(){
@@ -34,7 +35,6 @@ class ChatEdit extends React.Component {
 }
 
         function mapStateToProps(state){
-            let socketSend = new WebSocket("ws://35.197.31.151/");
             return {
                 user: state.auth.user
             }

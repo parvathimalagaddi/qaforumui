@@ -5,10 +5,15 @@ class ChatItem extends React.Component{
 	render(){
 		let chat = this.props.data;		
 		return (
-			<li className="well well-sm">
-				<span>{chat.user} : {chat.name}</span>
-				<div className="datetime">[{chat.createdAt.toString()}]</div>
-			</li>
+			<div className="well well-sm row">
+				<div className="col-sm-2">
+					<span>{chat.user} </span> 
+				</div>
+				<div className="col-sm-10">
+				<span>{chat.name}</span><br></br>
+				<p className="text-right">{chat.createdAt.toString()}</p>
+				</div>				
+			</div>
 		)
 	}
 }

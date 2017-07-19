@@ -7,7 +7,7 @@ export default (currentState = [], action = {}) => {
                 user: action.payload.user,
                 createdAt: new Date()
             };
-            return [...currentState, newChat];
+            return [newChat, ...currentState];
         default:
             return currentState;
     }

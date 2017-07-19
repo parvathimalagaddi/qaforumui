@@ -15,9 +15,9 @@ class ChatList extends React.Component{
 
 		return (
 			<section>
-				<ol>
+				<ul>
 					{chatItems}
-				</ol>
+				</ul>
 			</section>
 		)
 	}

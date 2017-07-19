@@ -10,10 +10,13 @@ class ChatWindow extends React.Component{
 		let chatList = this.props.chats;
 		
 
-		return(
-			<div>
+		return(			
+			<div className="panel panel-default">
+			<div className="panel-heading text-center">404 Chat Window</div>
+			<div className="panel-body">
 				<ChatEdit addNew={this.props.addNew}></ChatEdit>
 				<ChatList chats={chatList}></ChatList>
+			</div>
 			</div>
 		)
 	}
