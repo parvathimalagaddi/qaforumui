@@ -55,6 +55,18 @@ class NavigationBar extends React.Component {
 
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
+            <li>
+          <form onSubmit={this.onSubmit} className="navbar-form navbar-left">
+            <div className="input-group">
+              <input type="text" onChange={this.onChange}  name="searchCriteria" className="form-control" placeholder="Search"></input>
+              <div className="input-group-btn">
+                <button className="btn btn-default" type="submit">
+                  <i className="glyphicon glyphicon-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          </li>
         <li><a href="#" onClick={this.onProfileClick}>
         <span className="glyphicon glyphicon-user"></span>&nbsp;&nbsp;
           <span>{this.props.auth.user.sub}</span>
@@ -66,6 +78,18 @@ class NavigationBar extends React.Component {
 
     const guestLinks = (
       <ul className="nav navbar-nav navbar-right">
+      <li>
+          <form onSubmit={this.onSubmit} className="navbar-form navbar-left">
+            <div className="input-group">
+              <input type="text" onChange={this.onChange}  name="searchCriteria" className="form-control" placeholder="Search"></input>
+              <div className="input-group-btn">
+                <button className="btn btn-default" type="submit">
+                  <i className="glyphicon glyphicon-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          </li>
         <li><Link onClick={this.onSignUPClick}><span className="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Sign up</Link></li>
         <li><Link onClick={this.onLigInClick}><span className="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</Link></li>
       </ul>
@@ -78,22 +102,9 @@ class NavigationBar extends React.Component {
             <Link to="/" className="navbar-brand"><img src={logo} width="80" height="50"></img></Link>
 
           </div>
-
-          <form onSubmit={this.onSubmit} className="navbar-form navbar-left">
-            <div className="input-group">
-              <input type="text" onChange={this.onChange}  name="searchCriteria" className="form-control" placeholder="Search"></input>
-              <div className="input-group-btn">
-                <button className="btn btn-default" type="submit">
-                  <i className="glyphicon glyphicon-search"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-          <div className="collapse navbar-collapse">
             { isAuthenticated ? userLinks : guestLinks }
           </div>
-        </div>
-      </nav>
+        </nav>
     );
   }
 }
