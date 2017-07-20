@@ -5,17 +5,18 @@ import timezones from '../../data/timezones';
 import TextFieldGroup from '../common/TextFieldGroup';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
-class SignupForm extends React.Component {
+
+class ProfileForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       email: '',
-      password: '',
-      firstname:'',
-      lastname:'',
-      passwordConfirmation: '',
       timezone: '',
+      password: '',
+      firstname: '',
+      lastname: '',
+      passwordConfirmation: '',
       errors:{},
       isLoading: false,
       invalid: false
@@ -24,32 +25,43 @@ class SignupForm extends React.Component {
       this.onSubmit = this.onSubmit.bind(this);
   }
 
+
+   componentWillReceiveProps(nextProps){
+               if (nextProps.userProfile !== this.props.userProfile) {
+                    this.setState({username: nextProps.userProfile.username,firstname:nextProps.userProfile.firstname, lastname: nextProps.userProfile.lastname, email:nextProps.userProfile.email, timezone: nextProps.userProfile.timezone});
+               }
+
+       }
+
+/*   componentWillReceiveProps(nextProps){
+
+     if (nextProps.searchCriteria !== this.props.searchCriteria) {
+         this.setState({searchCriteria: nextProps.searchCriteria});
+     }
+
+   }*/
+
+
  validateInput(data) {
   let errors = {};
 
   if (Validator.isNull(data.username)) {
     errors.username = 'This field is required';
   }
-  if (Validator.isNull(data.email)) {
-    errors.email = 'This field is required';
-  }
   if (Validator.isNull(data.firstname)) {
     errors.firstname = 'This field is required';
+  }
+  if (Validator.isNull(data.email)) {
+    errors.email = 'This field is required';
   }
   if (!Validator.isEmail(data.email)) {
     errors.email = 'Email is invalid';
   }
-  if (Validator.isNull(data.password)) {
-    errors.password = 'This field is required';
-  }
-  if (Validator.isNull(data.passwordConfirmation)) {
-    errors.passwordConfirmation = 'This field is required';
+  if (Validator.isNull(data.timezone)) {
+    errors.timezone = 'This field is required';
   }
   if (!Validator.equals(data.password, data.passwordConfirmation)) {
     errors.passwordConfirmation = 'Passwords must match';
-  }
-  if (Validator.isNull(data.timezone)) {
-    errors.timezone = 'This field is required';
   }
 
   return {
@@ -78,34 +90,34 @@ class SignupForm extends React.Component {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      let userObj = {};
+      let userObj ={};
       userObj.username = this.state.username;
-      userObj.password = this.state.password;
       userObj.email = this.state.email;
       userObj.timezone = this.state.timezone;
       userObj.firstname = this.state.firstname;
       userObj.lastname = this.state.lastname;
-      this.props.userSignupRequest(userObj).then(
+      if(this.state.password != "") {
+        userObj.password = this.state.password;
+      }
+      this.props.profileEdit(userObj).then(
         (res) => {
           console.log("res" + res);
           this.props.addFlashMessage({
             type: 'success',
-            text: 'You signed up successfully. Please log in to post questions and answers!'
+            text: 'Profile updated successfully'
           });
             this.props.changeTab();
         },
         (err) => {
           console.log("error" + err);
           console.log(err);
-          this.setState({ errors: err.data, isLoading: false })
-          this.props.addFlashMessage({
-            type: 'success',
-            text: 'You signed up successfully. Welcome!'
-          });
+          this.setState({ errors: { form: err.response.data } , isLoading: false });
       }
-      );
+    );
     }
   }
+
+
   render() {
      const { errors } = this.state;
     const options = map(timezones, (val, key) =>
@@ -113,13 +125,15 @@ class SignupForm extends React.Component {
     );
     return(
       <form onSubmit={this.onSubmit}>
-      <h1> Join Our community </h1>
+      <h1> My Profile </h1>
+        { errors.form && <div className="alert alert-danger">{errors.form}</div> }
         <TextFieldGroup
           error={errors != undefined ? errors.username : ""}
           label="Username"
           onChange={this.onChange}
           value={this.state.username}
           field="username"
+          isDisabled = {true}
         />
         <TextFieldGroup
           error={errors != undefined ? errors.firstname : ""}
@@ -143,24 +157,6 @@ class SignupForm extends React.Component {
           field="email"
         />
 
-        <TextFieldGroup
-          error={errors != undefined ? errors.password: ""}
-          label="Password"
-          onChange={this.onChange}
-          value={this.state.password}
-          field="password"
-          type="password"
-        />
-
-        <TextFieldGroup
-          error={errors != undefined ?errors.passwordConfirmation: ""}
-          label="Password Confirmation"
-          onChange={this.onChange}
-          value={this.state.passwordConfirmation}
-          field="passwordConfirmation"
-          type="password"
-/>
-
 
         <div className={classnames('form-group', { 'has-error': errors != undefined ? errors.timezone : "" })}>
           <label className="control-label">Timezone</label>
@@ -175,10 +171,31 @@ class SignupForm extends React.Component {
           </select>
           {errors!= undefined && errors.timezone && <span className="help-block">{errors.timezone}</span>}
           </div>
+<hr/>
+<h3> Change Password </h3>
+<hr/>
+
+<TextFieldGroup
+  error={errors != undefined ? errors.password: ""}
+  label="New Password"
+  onChange={this.onChange}
+  value={this.state.password}
+  field="password"
+  type="password"
+/>
+
+<TextFieldGroup
+  error={errors != undefined ?errors.passwordConfirmation: ""}
+  label="Password Confirmation"
+  onChange={this.onChange}
+  value={this.state.passwordConfirmation}
+  field="passwordConfirmation"
+  type="password"
+/>
 
         <div className="form-group">
           <button disabled={this.state.isLoading}  className="btn btn-primary btn-lg">
-            Sign up
+            Submit
           </button>
         </div>
 
@@ -188,12 +205,14 @@ class SignupForm extends React.Component {
 
 }
 
-SignupForm.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired,
+
+ProfileForm.propTypes = {
+  profileEdit: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired
 }
 
-SignupForm.contextTypes = {
+ProfileForm.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
-export default SignupForm;
+
+export default ProfileForm;

@@ -6,11 +6,13 @@ import question from './reducers/question';
 import answers from './reducers/answers';
 import user from './reducers/user';
 import chatReducer from './reducers/chatReducer';
+import profile from './reducers/profile';
 export default combineReducers({
   flashMessages,
   auth,
   question,
   answers,
   user,
-  chatReducer
+  chatReducer,
+  profile
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-const TextFieldGroup = ({ field, value, label, error, type, onChange }) => {
+const TextFieldGroup = ({ field, value, label, error, isDisabled, type, onChange }) => {
   return (
     <div className={classnames('form-group', { 'has-error': error })}>
       <label className="control-label">{label}</label>
@@ -11,6 +11,7 @@ const TextFieldGroup = ({ field, value, label, error, type, onChange }) => {
         type={type}
         name={field}
         className="form-control"
+        disabled={isDisabled  ? true : false}
       />
     {error && <span className="help-block">{error}</span>}
     </div>  );
