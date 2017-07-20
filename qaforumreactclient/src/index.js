@@ -18,7 +18,14 @@ const store = createStore(
 );
 if (localStorage.jwtToken) {
   setAuthorizationToken(localStorage.jwtToken);
-  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
+  let authObj = jwtDecode(localStorage.jwtToken);
+  let userProfile ={};
+  if(localStorage.userProfile) {
+    userProfile = JSON.parse(localStorage.userProfile);
+    authObj.userProfile = userProfile;
+  }
+
+  store.dispatch(setCurrentUser(authObj));
 }
 render(
   <Provider store={store}>
