@@ -15,8 +15,8 @@ class ChatItem extends React.Component{
 						<div className="card chatborderme">
 							<h6 className="card-title">{this.props.user.userProfile.firstname}</h6>	
 							<hr></hr>				 
-							<p className="cart-text">{chat.name}</p>
-							<p className="card-link" > {chat.createdAt.toString()}</p>	
+							<p className="cart-text"><h5>{chat.name}</h5></p>
+							<p className="card-link"><h6> {chat.createdAt.toString()}</h6></p>
 						</div>				
 					</div>
 					<div className="col-sm-6"> </div>
@@ -28,11 +28,10 @@ class ChatItem extends React.Component{
 						<div className="card chatborderyou">	
 							<h6 className="card-title">{chat.user}</h6>	
 							<hr></hr>									 
-							<p className="cart-text">{chat.name}</p>
-							<p className="card-link" > {chat.createdAt.toString()}</p>	
+							<p className="cart-text"><h5>{chat.name}</h5></p>
+							<p className="card-link"><h6> {chat.createdAt.toString()}</h6></p>	
 						</div>				
-					</div>
-					
+					</div>					
 				</div>
 			}
 			</div>					

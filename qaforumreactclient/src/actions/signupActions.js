@@ -8,6 +8,6 @@ export function userSignupRequest(userData) {
 
 export function profileEdit(userData) {
   return dispatch => {
-    return axios.put('/api/v1/user/', userData);
+   return axios.put('/api/v1/user/'+userData.username+'/', userData);
   }
 }
