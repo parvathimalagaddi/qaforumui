@@ -12,7 +12,7 @@ class ChatWindow extends React.Component{
 
 		return(			
 			<div className="panel panel-default">
-			<div className="panel-heading text-center"> <span className="glyphicon glyphicon-user"><h4>{this.props.user.sub}</h4></span> </div>
+			<div className="panel-heading text-center"> <span className="glyphicon glyphicon-user"><h4>{this.props.user.firstname}</h4></span> </div>
 			<div className="panel-body chatscroll">
 				<ChatEdit addNew={this.props.addNew}></ChatEdit>
 				<ChatList chats={chatList}></ChatList>
@@ -25,7 +25,7 @@ class ChatWindow extends React.Component{
 		function mapStateToProps(state){
 			return {
 				chats : state.chatReducer,
-				user : state.auth.user
+				user : state.auth.user.userProfile
 			}
 		};
 

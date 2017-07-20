@@ -14,7 +14,7 @@ class ChatEdit extends React.Component {
     }
 
     onAddNewClick() {
-        let messageContent = {'message' : this.refs.txtChatMessage.value, 'user' : this.props.user.sub};
+        let messageContent = {'message' : this.refs.txtChatMessage.value, 'user' : this.props.user.userProfile.firstname + ' ( ' + this.props.user.sub + ' ) '};
         this.refs.txtChatMessage.value = "";
         this.props.addNew(messageContent);
         this.socketSend.send(JSON.stringify(messageContent));

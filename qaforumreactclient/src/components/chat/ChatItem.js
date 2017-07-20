@@ -9,11 +9,12 @@ class ChatItem extends React.Component{
 		let currUser = this.props.user.sub;	
 		return (	
 			<div>
-			{currUser == chat.user ?
+			{chat.user.includes(currUser) ?
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="card chatborderme">
-							<h6 className="card-title">{chat.user}</h6>					 
+							<h6 className="card-title">{this.props.user.userProfile.firstname}</h6>	
+							<hr></hr>				 
 							<p className="cart-text">{chat.name}</p>
 							<p className="card-link" > {chat.createdAt.toString()}</p>	
 						</div>				
@@ -25,7 +26,8 @@ class ChatItem extends React.Component{
 					<div className="col-sm-6"> </div>
 					<div className="col-sm-6">
 						<div className="card chatborderyou">	
-							<h6 className="card-title">{chat.user}</h6>											 
+							<h6 className="card-title">{chat.user}</h6>	
+							<hr></hr>									 
 							<p className="cart-text">{chat.name}</p>
 							<p className="card-link" > {chat.createdAt.toString()}</p>	
 						</div>				
