@@ -73,7 +73,11 @@ class SignupForm extends React.Component {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      this.props.userSignupRequest(this.state).then(
+      let userObj = {};
+      userObj.username = this.state.username;
+      userObj.password = this.state.password;
+      userObj.timezone = this.state.timezone;
+      this.props.userSignupRequest(userObj).then(
         (res) => {
           console.log("res" + res);
           this.props.addFlashMessage({

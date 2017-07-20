@@ -51,7 +51,10 @@ class LoginForm extends React.Component {
     this.props.deleteAllFlashMessage();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      this.props.login(this.state).then(
+      let userObj = {};
+      userObj.username = this.state.username;
+      userObj.password = this.state.password;
+      this.props.login(userObj).then(
         (res) => {
           console.log("LOGIN FORM");
           console.log(res);

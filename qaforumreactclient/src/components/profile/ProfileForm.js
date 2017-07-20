@@ -13,6 +13,8 @@ class ProfileForm extends React.Component {
       username: '',
       email: '',
       timezone: '',
+      password: '',
+      passwordConfirmation: '',
       errors:{},
       isLoading: false,
       invalid: false
@@ -24,7 +26,7 @@ class ProfileForm extends React.Component {
 
    componentWillReceiveProps(nextProps){
                if (nextProps.userProfile !== this.props.userProfile) {
-                    this.setState({username: nextProps.userProfile.username, email:nextProps.userProfile.email, timeZone: nextProps.userProfile.timezone});
+                    this.setState({username: nextProps.userProfile.username, email:nextProps.userProfile.email, timezone: nextProps.userProfile.timezone});
                }
 
        }
@@ -53,6 +55,9 @@ class ProfileForm extends React.Component {
   if (Validator.isNull(data.timezone)) {
     errors.timezone = 'This field is required';
   }
+  if (!Validator.equals(data.password, data.passwordConfirmation)) {
+    errors.passwordConfirmation = 'Passwords must match';
+  }
 
   return {
     errors,
@@ -80,7 +85,14 @@ class ProfileForm extends React.Component {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
-      /*this.props.profileEdit(this.state).then(
+      let userObj ={};
+      userObj.username = this.state.username;
+      userObj.email = this.state.email;
+      userObj.timezone = this.state.timezone;
+      if(this.state.password != "") {
+        userObj.password = this.state.password;
+      }
+      this.props.profileEdit(userObj).then(
         (res) => {
           console.log("res" + res);
           this.props.addFlashMessage({
@@ -92,13 +104,9 @@ class ProfileForm extends React.Component {
         (err) => {
           console.log("error" + err);
           console.log(err);
-          this.setState({ errors: err.data, isLoading: false })
-          this.props.addFlashMessage({
-            type: 'success',
-            text: 'Problem in profile update.'
-          });
+          this.setState({ errors: { form: err.response.data } , isLoading: false });
       }
-    );*/
+    );
     }
   }
 
@@ -111,6 +119,7 @@ class ProfileForm extends React.Component {
     return(
       <form onSubmit={this.onSubmit}>
       <h1> My Profile </h1>
+        { errors.form && <div className="alert alert-danger">{errors.form}</div> }
         <TextFieldGroup
           error={errors != undefined ? errors.username : ""}
           label="Username"
@@ -141,6 +150,27 @@ class ProfileForm extends React.Component {
           </select>
           {errors!= undefined && errors.timezone && <span className="help-block">{errors.timezone}</span>}
           </div>
+<hr/>
+<h3> Change Password </h3>
+<hr/>
+
+<TextFieldGroup
+  error={errors != undefined ? errors.password: ""}
+  label="New Password"
+  onChange={this.onChange}
+  value={this.state.password}
+  field="password"
+  type="password"
+/>
+
+<TextFieldGroup
+  error={errors != undefined ?errors.passwordConfirmation: ""}
+  label="Password Confirmation"
+  onChange={this.onChange}
+  value={this.state.passwordConfirmation}
+  field="passwordConfirmation"
+  type="password"
+/>
 
         <div className="form-group">
           <button disabled={this.state.isLoading}  className="btn btn-primary btn-lg">

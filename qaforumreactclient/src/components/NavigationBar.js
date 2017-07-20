@@ -24,6 +24,7 @@ class NavigationBar extends React.Component {
 
   logout(e) {
     e.preventDefault();
+    this.props.changeTab({ name: 'Home', isActive: true });
     this.props.logout();
   }
 
