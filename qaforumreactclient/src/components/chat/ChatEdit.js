@@ -22,9 +22,13 @@ class ChatEdit extends React.Component {
     render() {
         return ( 
             <form>
-                <div className="form-group">
+                <div className="form-group row">
+                    <div className="col-sm-10">
                     <input type="text" className="form-control" ref = "txtChatMessage"></input>
+                    </div>
+                    <div className="col-sm-2">
                     <button className="form-control btn btn-success" onClick = { this.onAddNewClick.bind(this) } > Broadcast </button> 
+                    </div>
                 </div>             
             </form>)
     }

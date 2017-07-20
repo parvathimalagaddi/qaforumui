@@ -1,21 +1,47 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 class ChatItem extends React.Component{
 
 	render(){
-		let chat = this.props.data;		
-		return (
-			<div className="well well-sm row">
-				<div className="col-sm-2">
-					<span>{chat.user} </span> 
+		let chat = this.props.data;	
+		let currUser = this.props.user.sub;	
+		return (	
+			<div>
+			{currUser == chat.user ?
+				<div className="row">
+					<div className="col-sm-6">
+						<div className="card chatborderme">
+							<h6 className="card-title">{chat.user}</h6>					 
+							<p className="cart-text">{chat.name}</p>
+							<p className="card-link" > {chat.createdAt.toString()}</p>	
+						</div>				
+					</div>
+					<div className="col-sm-6"> </div>
 				</div>
-				<div className="col-sm-10">
-				<span>{chat.name}</span><br></br>
-				<p className="text-right">{chat.createdAt.toString()}</p>
-				</div>				
-			</div>
+			:
+				<div className="row">
+					<div className="col-sm-6"> </div>
+					<div className="col-sm-6">
+						<div className="card chatborderyou">	
+							<h6 className="card-title">{chat.user}</h6>											 
+							<p className="cart-text">{chat.name}</p>
+							<p className="card-link" > {chat.createdAt.toString()}</p>	
+						</div>				
+					</div>
+					
+				</div>
+			}
+			</div>					
 		)
 	}
 }
 
-export default ChatItem;
+function mapStateToProps(state){
+    return {
+        user: state.auth.user
+    }
+};
+
+export default connect((mapStateToProps), {})(ChatItem); 

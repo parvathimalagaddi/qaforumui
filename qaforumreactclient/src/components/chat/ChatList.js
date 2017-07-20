@@ -2,6 +2,8 @@
 import React from 'react';
 
 import ChatItem from './ChatItem';
+import { connect } from 'react-redux';
+
 
 class ChatList extends React.Component{
 	render(){
@@ -23,4 +25,10 @@ class ChatList extends React.Component{
 	}
 }
 
-export default ChatList;
+        function mapStateToProps(state){
+            return {
+                user: state.auth.user
+            }
+        };
+
+export default connect((mapStateToProps), {})(ChatList); 
