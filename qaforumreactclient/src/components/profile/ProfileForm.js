@@ -14,6 +14,8 @@ class ProfileForm extends React.Component {
       email: '',
       timezone: '',
       password: '',
+      firstname: '',
+      lastname: '',
       passwordConfirmation: '',
       errors:{},
       isLoading: false,
@@ -26,7 +28,7 @@ class ProfileForm extends React.Component {
 
    componentWillReceiveProps(nextProps){
                if (nextProps.userProfile !== this.props.userProfile) {
-                    this.setState({username: nextProps.userProfile.username, email:nextProps.userProfile.email, timezone: nextProps.userProfile.timezone});
+                    this.setState({username: nextProps.userProfile.username,firstname:nextProps.userProfile.firstname, lastname: nextProps.userProfile.lastname, email:nextProps.userProfile.email, timezone: nextProps.userProfile.timezone});
                }
 
        }
@@ -45,6 +47,9 @@ class ProfileForm extends React.Component {
 
   if (Validator.isNull(data.username)) {
     errors.username = 'This field is required';
+  }
+  if (Validator.isNull(data.firstname)) {
+    errors.firstname = 'This field is required';
   }
   if (Validator.isNull(data.email)) {
     errors.email = 'This field is required';
@@ -89,6 +94,8 @@ class ProfileForm extends React.Component {
       userObj.username = this.state.username;
       userObj.email = this.state.email;
       userObj.timezone = this.state.timezone;
+      userObj.firstname = this.state.firstname;
+      userObj.lastname = this.state.lastname;
       if(this.state.password != "") {
         userObj.password = this.state.password;
       }
@@ -127,6 +134,20 @@ class ProfileForm extends React.Component {
           value={this.state.username}
           field="username"
           isDisabled = {true}
+        />
+        <TextFieldGroup
+          error={errors != undefined ? errors.firstname : ""}
+          label="First Name"
+          onChange={this.onChange}
+          value={this.state.firstname}
+          field="firstname"
+        />
+        <TextFieldGroup
+          error={errors != undefined ? errors.lastname : ""}
+          label="Last Name"
+          onChange={this.onChange}
+          value={this.state.lastname}
+          field="lastname"
         />
         <TextFieldGroup
           error={errors != undefined ? errors.email: ""}

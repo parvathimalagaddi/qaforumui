@@ -12,6 +12,8 @@ class SignupForm extends React.Component {
       username: '',
       email: '',
       password: '',
+      firstname:'',
+      lastname:'',
       passwordConfirmation: '',
       timezone: '',
       errors:{},
@@ -30,6 +32,9 @@ class SignupForm extends React.Component {
   }
   if (Validator.isNull(data.email)) {
     errors.email = 'This field is required';
+  }
+  if (Validator.isNull(data.firstname)) {
+    errors.firstname = 'This field is required';
   }
   if (!Validator.isEmail(data.email)) {
     errors.email = 'Email is invalid';
@@ -76,7 +81,10 @@ class SignupForm extends React.Component {
       let userObj = {};
       userObj.username = this.state.username;
       userObj.password = this.state.password;
+      userObj.email = this.state.email;
       userObj.timezone = this.state.timezone;
+      userObj.firstname = this.state.firstname;
+      userObj.lastname = this.state.lastname;
       this.props.userSignupRequest(userObj).then(
         (res) => {
           console.log("res" + res);
@@ -112,6 +120,20 @@ class SignupForm extends React.Component {
           onChange={this.onChange}
           value={this.state.username}
           field="username"
+        />
+        <TextFieldGroup
+          error={errors != undefined ? errors.firstname : ""}
+          label="First Name"
+          onChange={this.onChange}
+          value={this.state.firstname}
+          field="firstname"
+        />
+        <TextFieldGroup
+          error={errors != undefined ? errors.lastname : ""}
+          label="Last Name"
+          onChange={this.onChange}
+          value={this.state.lastname}
+          field="lastname"
         />
         <TextFieldGroup
           error={errors != undefined ? errors.email: ""}
