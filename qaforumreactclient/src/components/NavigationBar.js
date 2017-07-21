@@ -19,6 +19,7 @@ class NavigationBar extends React.Component {
     this.onSignUPClick = this.onSignUPClick.bind(this);
     this.onLigInClick = this.onLigInClick.bind(this);
     this.onProfileClick = this.onProfileClick.bind(this);
+    this.onHomeClick = this.onHomeClick.bind(this);
   }
 
 
@@ -37,6 +38,10 @@ class NavigationBar extends React.Component {
 
   onProfileClick(e) {
     this.props.changeTab({ name: 'My Profile', isActive: true });
+  }
+
+  onHomeClick(e) {
+    this.props.changeTab({ name: 'Home', isActive: true });
   }
 
   onLigInClick(e) {
@@ -99,7 +104,7 @@ class NavigationBar extends React.Component {
       <nav className="navbar navbar-inverse bg-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand"><img src={logo} width="80" height="50"></img></Link>
+            <Link to="/" className="navbar-brand" onClick={this.onHomeClick}><span className="glyphicon glyphicon-user"></span><span className="glyphicon glyphicon-link"></span><span className="glyphicon glyphicon-user"></span> &nbsp;Page Not Found</Link>
 
           </div>
             { isAuthenticated ? userLinks : guestLinks }
