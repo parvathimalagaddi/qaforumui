@@ -43,6 +43,7 @@ class Content extends React.Component {
 
   questionClickHandle(isQuestionClick, questionId) {
     this.setState({ isQuestionClick: isQuestionClick, questionId:questionId});
+    this.props.changeTab( { name: 'Home', isActive: true });
   }
 
   render() {
